@@ -3,15 +3,25 @@
     <img :src="product.image" :alt="product.name" />
     <h2>{{ product.name }}</h2>
     <p>{{ product.description }}</p>
-    <button>Beli</button>
+    <div class="button-container">
+      <button @click="deleteProduct">Beli Sekarang</button>
+      <button @click="deleteProduct">Masukkan ke Keranjang</button>
+      <button @click="deleteProduct" class="delete-btn">Hapus</button>
+    </div>
   </div>
 </template>
+
 
 <script>
 export default {
   name: 'Card',
   props: {
     product: Object
+  },
+  methods: {
+    deleteProduct() {
+      this.$emit('delete-product', this.product);
+    }
   }
 }
 </script>
@@ -43,19 +53,32 @@ export default {
   color: #666; /* Warna teks konten */
 }
 
+.button-container {
+  display: flex; /* Menggunakan flexbox */
+  justify-content: space-between; /* Mengatur jarak yang sama antara tombol */
+}
+
 .card button {
-  background-color: #1976D2; /* Warna latar belakang tombol */
+  background-color: palevioletred; /* Warna latar belakang tombol */
   color: #fff; /* Warna teks tombol */
   border: none; /* Tanpa garis tepi */
-  padding: 10px 20px; /* Padding tombol */
+  padding: 5px 10px; /* Padding tombol */
   border-radius: 5px; /* Sudut bulat tombol */
   cursor: pointer; /* Kursor berubah menjadi tangan saat dihover */
-  margin-top: 10px; /* Jarak antara konten dan tombol */
   transition: background-color 0.5s ease; /* Efek transisi saat dihover */
 }
 
 .card button:hover {
-  background-color: #1565C0; /* Warna latar belakang tombol saat dihover */
+  background-color: pink; /* Warna latar belakang tombol saat dihover */
+}
+
+.card button.delete-btn {
+  background-color: red; /* Warna latar belakang tombol delete */
+  color: #fff; /* Warna teks tombol */
+}
+
+.card button.delete-btn:hover {
+  background-color: rgb(236, 59, 59); /* Warna latar belakang tombol delete saat dihover */
 }
 
 </style>
